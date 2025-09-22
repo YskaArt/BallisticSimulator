@@ -20,6 +20,9 @@ public class Canon : MonoBehaviour
     [SerializeField] private float minX = -5f;
     [SerializeField] private float maxX = 5f;
 
+    private float cooldown = 5f;
+    private float lastShootTime = -Mathf.Infinity;
+
     private void Start()
     {
         shootButton.onClick.AddListener(Shoot);
@@ -36,19 +39,33 @@ public class Canon : MonoBehaviour
         // Rotación vertical del pivot (ángulo de disparo)
         float verticalAngle = verticalSlider.value; // rango 0-80
         canonPivot.localRotation = Quaternion.Euler(-verticalAngle, 0, 0);
+
+        // Controlar el estado del botón según cooldown
+        if (Time.time - lastShootTime < cooldown)
+        {
+            shootButton.interactable = false;
+        }
+        else
+        {
+            shootButton.interactable = true;
+        }
     }
 
     private void Shoot()
     {
+        if (Time.time - lastShootTime < cooldown)
+            return;
+
         GameObject proj = Instantiate(projectilePrefab, shootPoint.position, Quaternion.identity);
         Rigidbody rb = proj.GetComponent<Rigidbody>();
 
+        float mass = 1f;
         // Configurar masa
         switch (massDropdown.value)
         {
-            case 0: rb.mass = 1f; break;
-            case 1: rb.mass = 2f; break;
-            case 2: rb.mass = 5f; break;
+            case 0: mass = 1f; rb.mass = 1f; break;
+            case 1: mass = 2f; rb.mass = 2f; break;
+            case 2: mass = 5f; rb.mass = 5f; break;
         }
 
         // Dirección de disparo desde el shootPoint
@@ -57,5 +74,18 @@ public class Canon : MonoBehaviour
         // Aplicar fuerza
         float force = forceSlider.value;
         rb.AddForce(dir * force, ForceMode.Impulse);
+
+        // Pasar parámetros al ProjectileReport si existe
+        var report = proj.GetComponent<ProjectileReport>();
+        if (report != null)
+        {
+            // Ángulo vertical usado (en grados)
+            report.initialAngle = verticalSlider.value;
+            report.forceUsed = force;
+            report.massUsed = mass;
+        }
+
+        lastShootTime = Time.time;
+        shootButton.interactable = false;
     }
 }

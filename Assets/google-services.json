@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "1062049683033",
+    "firebase_url": "https://ballisticsimulator-default-rtdb.firebaseio.com",
+    "project_id": "ballisticsimulator",
+    "storage_bucket": "ballisticsimulator.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1062049683033:android:d0aebf981b28563abdc348",
+        "android_client_info": {
+          "package_name": "Ballistic.Simulator"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxLeGfmsT64VKCyoE7Rvni7r5aszcltgk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
