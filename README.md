@@ -1,12 +1,16 @@
-//Versión de Unity 6000.0.47f1
+//Versión de Unity 6000.0.47f
+
 //Como Jugar
+
 El jugador deberá usar los controles nombrados en la pantalla, estos son sliders, para poder determinar Angulo, Fuerza y Position de Disparo del Cañon.
 A su vez cuenta con dropdown para poder Seleccionar la Masa de la bala de Cañon.
 
 
 //Objetivo
+
 Construir un simulador balístico donde el jugador regula ángulo, fuerza y masa del proyectil para derribar objetivos conectados con Joints. El disparo y las colisiones deben estar gobernados por Rigidbody y el sistema de físicas de Unity. Registrar resultados de impacto para evaluar precisión y potencia.
-//Requisitos mínimos
+//Requisitos mínimos de Evaluación
+
 - Controles de disparo en pantalla:
 Ángulo y fuerza con Slider o InputField.
 Masa del proyectil seleccionable
